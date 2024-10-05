@@ -1,0 +1,19 @@
+name: 'Analogicus Janeway Documentation Action'
+description: 'This action generates jekyll docs'
+branding:
+  color: purple
+  icon: layers
+
+runs:
+    using: 'composite'
+    steps:
+
+      - name: Checkout dependencies
+        shell: bash
+        run: |
+          python3 -m pip install cicconf
+          cicconf --rundir ../ --config config.yaml clone --https
+      - name: Run docs
+        shell: bash
+        run: |
+          rm -rf docs/ && cicsim template tech/docs/jekyll_docs_template.yaml options.yaml
