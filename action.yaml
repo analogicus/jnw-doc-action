@@ -7,12 +7,14 @@ branding:
 runs:
     using: 'composite'
     steps:
-
       - name: Checkout dependencies
         shell: bash
         run: |
           python3 -m pip install cicconf
           cicconf --rundir ../ --config config.yaml clone --https
+      - name: Install cicsim
+        shell: bash
+        run:  python3 -m pip install cicsim
       - name: Run docs
         shell: bash
         run: |
